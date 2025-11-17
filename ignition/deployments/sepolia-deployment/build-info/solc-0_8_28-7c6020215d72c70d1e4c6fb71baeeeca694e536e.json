@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-7c6020215d72c70d1e4c6fb71baeeeca694e536e",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/HashRegistry.sol": "project/contracts/HashRegistry.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/HashRegistry.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.20;\r\n\r\ncontract HashRegistry {\r\n    mapping(bytes32 => bool) private uploaded;\r\n\r\n    event HashUploaded(bytes32 indexed hash, address indexed uploader);\r\n\r\n    function uploadHash(bytes32 hash) external {\r\n        require(!uploaded[hash], \"Hash already uploaded\");\r\n        uploaded[hash] = true;\r\n        emit HashUploaded(hash, msg.sender);\r\n    }\r\n\r\n    function verifyHash(bytes32 hash) external view returns (bool) {\r\n        return uploaded[hash];\r\n    }\r\n}"
+      }
+    }
+  }
+}
